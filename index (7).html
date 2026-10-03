@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Editor</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="toolbar">
+    <button onclick="formatar('bold')"><b>N</b></button>
+    <button onclick="formatar('italic')"><i>I</i></button>
+    <button onclick="formatar('justifyLeft')">Esq</button>
+    <button onclick="formatar('justifyCenter')">Centro</button>
+    <button onclick="formatar('justifyRight')">Dir</button>
+    <input type="color" id="cor" onchange="mudarCor()" title="Cor do texto">
+    <button onclick="abrirMatematica()" title="Fórmula"><b>∑</b></button>
+<button onclick="inserirFracao()">a/b</button>
+<button onclick="apagarCoisa()" style="background:#ff4444;color:white;border:none;" title="Apagar">🗑️</button>
+    <select id="tamanho" onchange="mudarTamanho()">
+      <option value="3">Normal</option>
+      <option value="5">Grande</option>
+      <option value="7">Gigante</option>
+    </select>
+    <button onclick="salvar()">Salvar</button>
+    <button onclick="baixarWord()">Word</button>
+    <button onclick="baixarPDFsimples()">PDF</button>
+  </div>
+
+  <div class="linha2">
+    <input id="nomeDoc" placeholder="Nome do documento">
+    <button onclick="novoDoc()">Novo</button>
+  </div>
+
+  <div id="listaDocs"></div>
+
+  <div id="editor-container">
+  <div class="pagina" contenteditable="true">
+    FORÇA DE ATRITO
+  </div>
+</div>
+
+<button onclick="novaPagina()" style="position:fixed; bottom:20px; left:15px; padding:10px 15px; background:white; color:black; border:1px solid black; border-radius:20px;">+ Página</button>
+
+  <p id="contador">Palavras: 0</p>
+  <div id="capa-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:9999; padding:15px; overflow:auto;">
+  <h3>Gerar Capa Universitária</h3>
+  <input id="uni" placeholder="Universidade ex: UCM - Universidade Católica" style="width:100%;margin:5px 0;padding:10px;">
+  <input id="facul" placeholder="Faculdade ex: Faculdade de Economia" style="width:100%;margin:5px 0;padding:10px;">
+  <input id="curso" placeholder="Curso ex: Contabilidade" style="width:100%;margin:5px 0;padding:10px;">
+  <input id="nome" placeholder="Teu nome completo" style="width:100%;margin:5px 0;padding:10px;">
+  <input id="titulo" placeholder="Título do trabalho" style="width:100%;margin:5px 0;padding:10px;">
+  <input id="local" placeholder="Local ex: Mueda" style="width:100%;margin:5px 0;padding:10px;">
+  <input id="ano" placeholder="Ano ex: 2026" style="width:100%;margin:5px 0;padding:10px;">
+
+  <button onclick="gerarCapa()" style="width:100%;padding:12px;background:black;color:white;margin-top:10px;">GERAR CAPA AGORA</button>
+  <button onclick="document.getElementById('capa-modal').style.display='none'" style="width:100%;padding:10px;margin-top:5px;">Fechar</button>
+</div>
+
+<button onclick="document.getElementById('capa-modal').style.display='block'" style="position:fixed; bottom:80px; right:15px; padding:12px 18px; background:#000; color:white; border-radius:25px; z-index:1000;">+ Capa UCM</button>
+
+<div id="math-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; padding:15px;">
+  <div style="background:white; padding:20px; border-radius:10px; max-width:500px; margin:20px auto;">
+    <h3>Escrever Fórmula</h3>
+    <p style="font-size:12px;color:#666;">Exemplos: \frac{a}{b} , x^2 , \sqrt{9} , \int , \sum</p>
+    <input id="latexInput" placeholder="Ex: \frac{-b \pm \sqrt{b^2-4ac}}{2a}" style="width:100%;padding:12px;margin:10px 0;border:2px solid #000;">
+    <div id="previewMath" style="min-height:60px; border:1px dashed #ccc; padding:10px; text-align:center; margin:10px 0;"></div>
+    <button onclick="inserirFormula()" style="width:100%;padding:12px;background:black;color:white;">INSERIR NO TEXTO</button>
+    <button onclick="document.getElementById('math-modal').style.display='none'" style="width:100%;padding:10px;margin-top:5px;">Fechar</button>
+  </div>
+</div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
